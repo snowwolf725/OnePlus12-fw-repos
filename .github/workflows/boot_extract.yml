@@ -42,9 +42,10 @@ jobs:
               run: |  
                  pip install unzip-http
                  unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
-                 echo "TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)"
+                 echo "TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)" >> $GITHUB_ENV
                  echo "REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')" >> $GITHUB_ENV
-                 echo "############## $(echo ${{env.REL_NAME}}) ##############"
+                 echo ${{ env.TAG_NAME }}
+                 echo "############## $(echo ${{ env.REL_NAME }}) ##############"
                         
 #            - name: Creating release
 #              run: |

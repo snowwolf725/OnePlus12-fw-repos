@@ -25,52 +25,27 @@ jobs:
               with:
                    python-version: '3.13'
               
-            - name: Download payload dumper
-              run: |
-                pip install git+https://github.com/5ec1cff/payload-dumper
+#            - name: Download payload dumper
+#              run: |
+#                pip install git+https://github.com/5ec1cff/payload-dumper
             
-            - name: Extracting OTA
-              run: |
-                payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
+#            - name: Extracting OTA
+#              run: |
+#                payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
 
-            - name: List files in the repository
-              run: |
-                mv output/*.img .
-                ls ${{ github.workspace }}
-                
-#            - name: Downloading otadump    
-#              run: wget -O otadump https://github.com/crazystylus/otadump/releases/download/0.1.2/otadump-0.1.2-x86_64-unknown-linux-gnu.tar.gz && tar xvf otadump && rm LICENSE README.md
-            
-#            - name: Downloading OTA
-#              run: wget -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
-            
-#            - name: Extracting zip 
-#              run: unzip ota.zip 
-                
+#            - name: List files in the repository
+#              run: |
+#                mv output/*.img .
+#                ls ${{ github.workspace }}
+                                
             - name: Setting up Release name
               run: |  
                  pip install unzip-http
                  unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
                  echo "REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')" >> $GITHUB_ENV
                  echo "############## $(echo ${{env.REL_NAME}}) ##############"
-            
-#            - name: Dumping boot and init_boot    
-#              run: | 
-#                ./otadump payload.bin --partitions boot,init_boot,recovery
-#                cp extracted*/boot.img extracted*/init_boot.img extracted*/recovery.img $GITHUB_WORKSPACE
-#                sha1sum boot.img > boot.img.sha1sum
-#                sha1sum init_boot.img > init_boot.img.sha1sum
-#                sha1sum recovery.img > recovery.img.sha1sum
-#                rm -rf extracted*/
-#                ./otadump payload.bin --partitions abl,aop,aop_config,bluetooth,cpucp,devcfg,dsp,engineering_cdt,featenabler,hyp,imagefv,keymaster,modem,oplus_sec,oplusstanvbk,qupfw,shrm,splash,tz,uefi,uefisecapp,xbl,xbl_config,xbl_ramdump
-#                mkdir firmware
-#                cp -r extracted*/* firmware
-#                wget -O firmware/install_images.bat https://gist.githubusercontent.com/inferno0230/128507cea45202db46176b616492bf77/raw/41b47f1d207ca7c53d6c21e7e4f38077dd7bbc3c/install_images.bat
-#                wget -O firmware/install_images.sh https://gist.githubusercontent.com/inferno0230/a6e2a6a9abb0e9a5159c78a7936d8c72/raw/9e15305fbd8f249278981a76cc46072a317ae3ea/OP12R_firmware.sh
-#                zip -r fastboot_firmware.zip firmware
-#                rm -rf extracted*/
-            
-            - name: Creating release
-              run: |
-                REL_NAME="PJD110"
-                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.img init_boot.img recovery.img 
+                        
+#            - name: Creating release
+#              run: |
+#                REL_NAME="PJD110"
+#                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.img init_boot.img recovery.img 

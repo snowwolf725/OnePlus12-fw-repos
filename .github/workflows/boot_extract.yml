@@ -25,31 +25,28 @@ jobs:
               with:
                    python-version: '3.13'
               
-#            - name: Download payload dumper
-#              run: |
-#                pip install git+https://github.com/5ec1cff/payload-dumper
+            - name: Download payload dumper
+              run: |
+                pip install git+https://github.com/5ec1cff/payload-dumper
             
-#            - name: Extracting OTA
-#              run: |
-#                payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
+            - name: Extracting OTA
+              run: |
+                payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
 
-#            - name: List files in the repository
-#              run: |
-#                mv output/*.img .
-#                ls ${{ github.workspace }}
+            - name: List files in the repository
+              run: |
+                mv output/*.img .
+                ls ${{ github.workspace }}
                                 
             - name: Setting up Release name
               run: |  
-                 echo "action_state=yellow" >> $GITHUB_ENV
-                 echo "${{ env.action_state }}"
                  pip install unzip-http
                  unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
-                 echo "TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)" >> $GITHUB_ENV
-                 echo "REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')" >> $GITHUB_ENV
                  echo ${{ env.TAG_NAME }}
                  echo "############## $(echo ${{ env.REL_NAME }}) ##############"
                         
-#            - name: Creating release
-#              run: |
-#                REL_NAME="PJD110"
-#                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.img init_boot.img recovery.img 
+            - name: Creating release
+              run: |
+                TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)
+                REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')
+                gh release create $TAG_NAME --title $(echo $REL_NAME) --notes "" boot.img init_boot.img recovery.img 

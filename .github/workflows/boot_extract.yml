@@ -40,6 +40,8 @@ jobs:
                                 
             - name: Setting up Release name
               run: |  
+                 echo "action_state=yellow" >> $GITHUB_ENV
+                 echo "${{ env.action_state }}"
                  pip install unzip-http
                  unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
                  echo "TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)" >> $GITHUB_ENV

@@ -27,17 +27,19 @@ jobs:
                 sudo apt-get install -y axel python3.12 
                 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12 7
                 sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 7
+                sudo apt-get remove python-pip
+                sudo apt-get install python-pip
 
             - name: Download payload dumper
               run: |
                 python --version
                 pip --version
                 pip3 --version
-                pip install git+https://github.com/5ec1cff/payload-dumper
+                python3.12 -m pip install git+https://github.com/5ec1cff/payload-dumper
 
             - name: Extracting OTA
               run: |
-                payload_dumper --partitions boot,init_boot,recovery "${{ github.event.inputs.fileurl }}"
+                python3.12 -m payload_dumper --partitions boot,init_boot,recovery "${{ github.event.inputs.fileurl }}"
                 
 #            - name: Downloading otadump    
 #              run: wget -O otadump https://github.com/crazystylus/otadump/releases/download/0.1.2/otadump-0.1.2-x86_64-unknown-linux-gnu.tar.gz && tar xvf otadump && rm LICENSE README.md

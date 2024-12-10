@@ -19,17 +19,24 @@ jobs:
         steps:
             - name: Checkout Repository
               uses: actions/checkout@main
-            
+
             - name: Set up Environment
-              run: |
-                sudo add-apt-repository ppa:deadsnakes/ppa
-                sudo apt-get update && sudo apt upgrade -y
-                sudo apt-get install -y axel python3.12 
-                sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12 7
-                sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 7
-                cat /usr/lib/python3/dist-packages/pip
-                sudo sed -i 's/10/12/g' /usr/lib/python3/dist-packages/pip
-                cat /usr/lib/python3/dist-packages/pip
+            - uses: actions/setup-python@v5
+              with:
+                   python-version: '3.13'
+            - run:
+                pip install git+https://github.com/5ec1cff/payload-dumper
+                
+#            - name: Set up Environment
+#              run: |
+#                sudo add-apt-repository ppa:deadsnakes/ppa
+#                sudo apt-get update && sudo apt upgrade -y
+#                sudo apt-get install -y axel python3.12 
+#                sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12 7
+#                sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 7
+#                cat /usr/lib/python3/dist-packages/pip
+#                sudo sed -i 's/10/12/g' /usr/lib/python3/dist-packages/pip
+#                cat /usr/lib/python3/dist-packages/pip
 
                 
             - name: Download payload dumper

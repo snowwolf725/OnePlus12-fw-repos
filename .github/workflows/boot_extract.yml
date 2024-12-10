@@ -31,9 +31,11 @@ jobs:
             
             - name: Extracting OTA
               run: |
-                ls *
                 payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
-                ls *.img
+
+            - name: List files in the repository
+              run: |
+                ls ${{ github.workspace }}
                 
 #            - name: Downloading otadump    
 #              run: wget -O otadump https://github.com/crazystylus/otadump/releases/download/0.1.2/otadump-0.1.2-x86_64-unknown-linux-gnu.tar.gz && tar xvf otadump && rm LICENSE README.md

@@ -35,8 +35,8 @@ jobs:
 
             - name: List files in the repository
               run: |
-                ls ${{ github.workspace }}/output
                 mv output/* ..
+                ls ${{ github.workspace }}
                 
 #            - name: Downloading otadump    
 #              run: wget -O otadump https://github.com/crazystylus/otadump/releases/download/0.1.2/otadump-0.1.2-x86_64-unknown-linux-gnu.tar.gz && tar xvf otadump && rm LICENSE README.md
@@ -47,8 +47,11 @@ jobs:
 #            - name: Extracting zip 
 #              run: unzip ota.zip 
                 
-#            - name: Setting up Release name
-#              run: |  
+            - name: Setting up Release name
+              run: |  
+                 pip install unzip-http
+                 unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
+                 ls
 #                echo "REL_NAME=$(grep "version_name=" META-INF/com/android/metadata | sed 's/^[^=]*=//')" >> $GITHUB_ENV
 #                echo "############## $(echo ${{env.REL_NAME}}) ##############"
             

@@ -22,8 +22,9 @@ jobs:
             
             - name: Set up Environment
               run: |
+                sudo add-apt-repository ppa:deadsnakes/ppa
                 sudo apt-get update && sudo apt upgrade -y
-                sudo apt-get install -y axel python3 
+                sudo apt-get install -y axel python3.12 
 
             - name: Download payload dumper
               run: |

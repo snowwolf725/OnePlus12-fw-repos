@@ -35,7 +35,7 @@ jobs:
 
             - name: List files in the repository
               run: |
-                mv output/* ..
+                mv output/*.img .
                 ls ${{ github.workspace }}
                 
 #            - name: Downloading otadump    
@@ -51,9 +51,8 @@ jobs:
               run: |  
                  pip install unzip-http
                  unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
-                 ls
-#                echo "REL_NAME=$(grep "version_name=" META-INF/com/android/metadata | sed 's/^[^=]*=//')" >> $GITHUB_ENV
-#                echo "############## $(echo ${{env.REL_NAME}}) ##############"
+                 echo "REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')" >> $GITHUB_ENV
+                 echo "############## $(echo ${{env.REL_NAME}}) ##############"
             
 #            - name: Dumping boot and init_boot    
 #              run: | 

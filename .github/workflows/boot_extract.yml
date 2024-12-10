@@ -26,12 +26,13 @@ jobs:
                 sudo apt-get update && sudo apt upgrade -y
                 sudo apt-get install -y axel python3.12 
                 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12 7
-                sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3.12 7
+                sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 7
 
             - name: Download payload dumper
               run: |
                 python --version
                 pip --version
+                pip3 --version
                 pip install git+https://github.com/5ec1cff/payload-dumper
 
             - name: Extracting OTA

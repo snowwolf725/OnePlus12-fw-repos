@@ -50,4 +50,4 @@ jobs:
               run: |
                 TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)
                 REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')
-                gh release create $TAG_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 
+                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 

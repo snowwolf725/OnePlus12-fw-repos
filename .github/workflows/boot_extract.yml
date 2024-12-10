@@ -23,7 +23,7 @@ jobs:
             - name: Set up Environment
               run: |
                 sudo apt-get update && sudo apt upgrade -y
-                sudo apt-get install -y axel python 
+                sudo apt-get install -y axel python3 
 
             - name: Download payload dumper
               run: |

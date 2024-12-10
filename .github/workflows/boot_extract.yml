@@ -25,7 +25,7 @@ jobs:
                 sudo add-apt-repository ppa:deadsnakes/ppa
                 sudo apt-get update && sudo apt upgrade -y
                 sudo apt-get install -y axel python3.12 
-                sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12
+                sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12 7
 
             - name: Download payload dumper
               run: |

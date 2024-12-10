@@ -18,9 +18,9 @@ jobs:
           id: ota-link
         steps:
             - name: Checkout Repository
-              uses: actions/checkout@main
+            - uses: actions/checkout@main
 
-            - name: Set up Environment
+            - name: Set up Python
             - uses: actions/setup-python@v5
               with:
                    python-version: '3.13'

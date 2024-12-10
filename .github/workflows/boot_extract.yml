@@ -24,7 +24,11 @@ jobs:
               uses: actions/setup-python@v5
               with:
                    python-version: '3.13'
-              
+
+            - name: Setup environment
+              run: |
+                apt-get install zip
+                
             - name: Download payload dumper
               run: |
                 pip install git+https://github.com/5ec1cff/payload-dumper
@@ -32,21 +36,17 @@ jobs:
             - name: Extracting OTA
               run: |
                 payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
-
-            - name: List files in the repository
-              run: |
-                mv output/*.img .
-                ls ${{ github.workspace }}
-                                
+                zip boot.zip boot.img
+                zip init_boot.zip init_boot.img
+                zip recovery.zip recovery.img
+                                            
             - name: Setting up Release name
               run: |  
                  pip install unzip-http
                  unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
-                 echo ${{ env.TAG_NAME }}
-                 echo "############## $(echo ${{ env.REL_NAME }}) ##############"
-                        
+                 
             - name: Creating release
               run: |
                 TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)
                 REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')
-                gh release create $TAG_NAME --title $(echo $REL_NAME) --notes "" boot.img init_boot.img recovery.img 
+                gh release create $TAG_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 

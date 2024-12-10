@@ -27,6 +27,9 @@ jobs:
                 sudo apt-get install -y axel python3.12 
                 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.12 7
                 sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 7
+                cat /usr/bin/pip
+                sudo sed -i 's/10/12/g' /usr/bin/pip
+                cat /usr/bin/pip
 
                 
             - name: Download payload dumper

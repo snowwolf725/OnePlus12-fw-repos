@@ -27,7 +27,7 @@ jobs:
 
             - name: Setup environment
               run: |
-                apt-get install zip
+                sudo apt-get install zip
                 
             - name: Download payload dumper
               run: |

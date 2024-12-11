@@ -1,9 +1,9 @@
 OnePlus 12 Models :  
   
-China: PJD110 (ColorOS 14)  
-India: CPH2573 (OxygenOS 14)  
-Global (ROW) and EU: CPH2581 (OxygenOS 14)  
-North America : CPH2583 (OxygenOS 14)  
+China: PJD110 (ColorOS)  
+India: CPH2573 (OxygenOS)  
+Global (ROW) and EU: CPH2581 (OxygenOS)  
+North America : CPH2583 (OxygenOS)  
   
 # Android 14:  
   

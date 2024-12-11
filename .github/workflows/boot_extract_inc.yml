@@ -1,8 +1,12 @@
-name: Extract init_boot/boot/recovery image
+name: Extract image (Incremental OTA)
 
 on:
     workflow_dispatch:
         inputs:
+            oldversion:
+                description: 'Base version'
+                required: true
+                type: string
             fileurl:
                 description: 'link of full OxygenOS/ColorOS file'
                 required: true

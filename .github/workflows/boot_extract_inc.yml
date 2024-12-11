@@ -53,6 +53,7 @@ jobs:
                 git clone https://github.com/LineageOS/android_prebuilts_extract-tools.git
 
             - name: Download  Incremental OTA
+              run: |
                 wget -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
                                          
 #            - name: Extracting OTA

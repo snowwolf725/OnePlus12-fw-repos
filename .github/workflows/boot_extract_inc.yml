@@ -25,7 +25,7 @@ jobs:
             - uses: robinraju/release-downloader@v1
               with:
                 repository: 'snowwolf725/OnePlus12-fw-repos'
-                tag: 'v1.0.0'
+                tag: 'PJD110_15.0.0.205(CN01)'
                 fileName: '*.zip'
                 
             - name: Checkout Repository

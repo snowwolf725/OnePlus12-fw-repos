@@ -21,6 +21,9 @@ jobs:
         outputs:
           id: ota-link
         steps:
+            - name: Test
+              run: |
+                echo ${{ github.event.inputs.oldversion }}
             - name: Checkout Repository
               uses: actions/checkout@main
 

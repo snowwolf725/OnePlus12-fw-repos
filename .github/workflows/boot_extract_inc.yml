@@ -51,11 +51,10 @@ jobs:
             - name: Setup OTA Extractor 
               run: |
                 git clone https://github.com/LineageOS/android_prebuilts_extract-tools.git
-                             
-#            - name: Download payload dumper
-#              run: |
-#                pip install git+https://github.com/5ec1cff/payload-dumper
-            
+
+            - name: Download  Incremental OTA
+                wget -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
+                                         
 #            - name: Extracting OTA
 #              run: |
 #                payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}

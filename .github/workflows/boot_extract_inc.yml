@@ -21,16 +21,16 @@ jobs:
         outputs:
           id: ota-link
         steps:
-            - name: Test
+            - name: Checkout Repository
+              uses: actions/checkout@main
+              
+            - name: Checkout Base Version 
               uses: robinraju/release-downloader@v1
               with:
                 repository: 'snowwolf725/OnePlus12-fw-repos'
                 tag: 'PJD110_15.0.0.205(CN01)'
                 fileName: '*.zip'
                 
-            - name: Checkout Repository
-              uses: actions/checkout@main
-
             - name: Set up Python
               uses: actions/setup-python@v5
               with:
@@ -38,8 +38,16 @@ jobs:
 
             - name: Setup environment
               run: |
-                sudo apt-get install zip
+                sudo apt-get install zip unzip
                 
+            - name: Setup Base version rom
+              run: |
+                unzip boot.zip
+                unzip init_boot.zip
+                unzip recovery.zip
+                mkdir base
+                mv *.img base
+                             
 #            - name: Download payload dumper
 #              run: |
 #                pip install git+https://github.com/5ec1cff/payload-dumper

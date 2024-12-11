@@ -23,7 +23,9 @@ jobs:
         steps:
             - name: Test
               run: |
-                echo ${{ github.event.inputs.oldversion }}
+                export TAG_NAME=${{ github.event.inputs.oldversion }}
+                if TAG_NAME=="CPH2581" ;then TAG_NAME="CPH2581(GLO)";elif TAG_NAME=="CPH2581EEA";then TAG_NAME="CPH2581(GLO)";fi
+                
             - name: Checkout Repository
               uses: actions/checkout@main
 

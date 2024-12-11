@@ -38,7 +38,7 @@ jobs:
 
             - name: Setup environment
               run: |
-                sudo apt-get install zip unzip
+                sudo apt-get install zip unzip git
                 
             - name: Setup Base version rom
               run: |
@@ -47,6 +47,10 @@ jobs:
                 unzip recovery.zip
                 mkdir base
                 mv *.img base
+
+            - name: Setup OTA Extractor 
+              run: |
+                git clone https://github.com/LineageOS/android_prebuilts_extract-tools.git
                              
 #            - name: Download payload dumper
 #              run: |

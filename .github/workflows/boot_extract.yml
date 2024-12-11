@@ -48,6 +48,9 @@ jobs:
                  
             - name: Creating release
               run: |
+                EU="(EU)"
+                GLO="(GLO)"
                 TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)
                 REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')
+                if [ $TAG_NAME == 'CPH2581' ]; then REL_NAME="$REL_NAME$GLO";elif [ $TAG_NAME == "CPH2581EEA" ]; then REL_NAME="$REL_NAME$EU";fi
                 gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 

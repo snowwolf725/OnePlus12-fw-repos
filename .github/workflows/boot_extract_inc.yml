@@ -22,10 +22,11 @@ jobs:
           id: ota-link
         steps:
             - name: Test
-              run: |
-                export TAG_NAME=${{ github.event.inputs.oldversion }}
-                if TAG_NAME=="CPH2581" ;then TAG_NAME="CPH2581(GLO)";elif TAG_NAME=="CPH2581EEA";then TAG_NAME="CPH2581(EU)";fi
-                echo $TAG_NAME
+            - uses: robinraju/release-downloader@v1
+              with:
+                repository: 'snowwolf725/OnePlus12-fw-repos'
+                tag: 'v1.0.0'
+                fileName: '*.zip'
                 
             - name: Checkout Repository
               uses: actions/checkout@main

@@ -1,4 +1,4 @@
-name: Extract init_boot/boot/recovery image
+name: Extract image
 
 on:
     workflow_dispatch:

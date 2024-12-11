@@ -24,7 +24,7 @@ jobs:
             - name: Test
               run: |
                 export TAG_NAME=${{ github.event.inputs.oldversion }}
-                if TAG_NAME=="CPH2581" ;then TAG_NAME="CPH2581(GLO)";elif TAG_NAME=="CPH2581EEA";then TAG_NAME="CPH2581(GLO)";fi
+                if TAG_NAME=="CPH2581" ;then TAG_NAME="CPH2581(GLO)";elif TAG_NAME=="CPH2581EEA";then TAG_NAME="CPH2581(EU)";fi
                 echo $TAG_NAME
                 
             - name: Checkout Repository

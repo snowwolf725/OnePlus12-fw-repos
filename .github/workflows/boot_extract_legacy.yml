@@ -1,1 +1,56 @@
+name: Extract image
 
+on:
+    workflow_dispatch:
+        inputs:
+            fileurl:
+                description: 'link of full OxygenOS/ColorOS file'
+                required: true
+                type: string
+
+env:
+    GH_TOKEN: ${{ github.token }}
+
+jobs:
+    extracting-boot:
+        runs-on: ubuntu-latest
+        outputs:
+          id: ota-link
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@main
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                   python-version: '3.13'
+
+            - name: Setup environment
+              run: |
+                sudo apt-get install zip
+                
+            - name: Download payload dumper
+              run: |
+                pip install git+https://github.com/5ec1cff/payload-dumper
+            
+            - name: Extracting OTA
+              run: |
+                payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
+                mv output/*.img .
+                zip boot.zip boot.img
+                zip init_boot.zip init_boot.img
+                zip recovery.zip recovery.img
+                                            
+            - name: Setting up Release name
+              run: |  
+                 pip install unzip-http
+                 unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
+                 
+            - name: Creating release
+              run: |
+                EU="(EU)"
+                GLO="(GLO)"
+                TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)
+                REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')
+                if [ $TAG_NAME == 'CPH2581' ]; then REL_NAME="$REL_NAME$GLO";elif [ $TAG_NAME == "CPH2581EEA" ]; then REL_NAME="$REL_NAME$EU";fi
+                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 

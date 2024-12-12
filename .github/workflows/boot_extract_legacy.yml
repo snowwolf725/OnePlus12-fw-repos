@@ -27,7 +27,8 @@ jobs:
 
             - name: Setup environment
               run: |
-                sudo apt-get install zip axel
+                sudo apt-get update && sudo apt upgrade -y
+                sudo apt-get install -y zip axel
             
             - name: Download OTA
               run: |

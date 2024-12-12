@@ -27,7 +27,11 @@ jobs:
 
             - name: Setup environment
               run: |
-                sudo apt-get install zip
+                sudo apt-get install zip axel
+            
+            - name: Download OTA
+              run: |
+                wget -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
                 
             - name: Download payload dumper
               run: |
@@ -35,7 +39,7 @@ jobs:
             
             - name: Extracting OTA
               run: |
-                payload_dumper --partitions boot,init_boot,recovery ${{ github.event.inputs.fileurl }}
+                payload_dumper --partitions boot,init_boot,recovery ota.zip
                 mv output/*.img .
                 zip boot.zip boot.img
                 zip init_boot.zip init_boot.img

@@ -3,7 +3,7 @@ name: Extract image (Incremental OTA)
 on:
     workflow_dispatch:
         inputs:
-            oldversion:
+            baseversion:
                 description: 'Base version'
                 required: true
                 type: string
@@ -28,7 +28,7 @@ jobs:
               uses: robinraju/release-downloader@v1
               with:
                 repository: 'snowwolf725/OnePlus12-fw-repos'
-                tag: "${{ github.event.inputs.fileurl }}"
+                tag: "${{ github.event.inputs.baseversion }}"
                 fileName: '*.zip'
                 
             - name: Set up Python

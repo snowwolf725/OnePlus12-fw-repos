@@ -28,11 +28,12 @@ jobs:
             - name: Setup environment
               run: |
                 sudo apt-get update && sudo apt upgrade -y
-                sudo apt-get install -y zip axel
+                sudo apt-get install -y zip unzip axel
             
             - name: Download OTA
               run: |
                 wget -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
+                unzip ota.zip
                 
             - name: Download payload dumper
               run: |
@@ -40,22 +41,17 @@ jobs:
             
             - name: Extracting OTA
               run: |
-                payload_dumper --partitions boot,init_boot,recovery ota.zip
+                payload_dumper --partitions boot,init_boot,recovery payload.bin
                 mv output/*.img .
                 zip boot.zip boot.img
                 zip init_boot.zip init_boot.img
                 zip recovery.zip recovery.img
                                             
-            - name: Setting up Release name
-              run: |  
-                 pip install unzip-http
-                 unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
-                 
             - name: Creating release
               run: |
                 EU="(EU)"
                 GLO="(GLO)"
-                TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)
-                REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')
+                TAG_NAME=$(grep "product_name=" META-INF/com/android/metadata | cut -d = -f 2)
+                REL_NAME=$(grep "version_name=" META-INF/com/android/metadata | sed 's/^[^=]*=//')
                 if [ $TAG_NAME == 'CPH2581' ]; then REL_NAME="$REL_NAME$GLO";elif [ $TAG_NAME == "CPH2581EEA" ]; then REL_NAME="$REL_NAME$EU";fi
                 gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 

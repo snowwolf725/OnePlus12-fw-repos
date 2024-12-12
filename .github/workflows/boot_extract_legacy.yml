@@ -1,4 +1,4 @@
-name: Extract image
+name: Extract image Legacy
 
 on:
     workflow_dispatch:

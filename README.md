@@ -95,6 +95,7 @@ North America : CPH2583 (OxygenOS)
 
 
 ## CPH2573 IN
+[CPH2573\_15.0.0.404(EX01)](https://gauss-otacostmanual-in.allawnofs.com/remove-ac3b6b799d9df9bfa5a2398eff475fe6/component-ota/24/12/12/d7f3f00eace045fa9e36a4de2b090d98.zip)  
 [CPH2573\_15.0.0.305(EX01)](https://gauss-otacostmanual-in.allawnofs.com/remove-7eaa75086cd697805944874f87ceb628/component-ota/24/11/23/2c4955b025f2403eb85ba0440693d034.zip)  
 [CPH2573\_15.0.0.206(EX01)](https://gauss-otacostmanual-in.allawnofs.com/remove-41a2c14dceddbffe2ab3236e90cdd179/component-ota/24/11/04/c3787160e3614577be0fecbe7ff2bff5.zip)  
 [CPH2573\_15.0.0.205(EX01)](https://gauss-otacostmanual-in.allawnofs.com/remove-c5b607ef0085aaf72c0549707fac2a3c/component-ota/24/10/29/9ccef484ddb14757ab6de5b4c9e55350.zip)  

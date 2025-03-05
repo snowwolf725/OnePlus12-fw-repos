@@ -33,7 +33,7 @@ jobs:
             - name: Download OTA
               run: |
                 wget -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
-                wget --user-agent="User-Agent: Dalvik/2.1.0 (Linux; U; Android 14; PJD110 Build/UKQ1.231108.001)" -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
+                wget --user-agent="User-Agent: Dalvik/2.1.0 (Linux; U; Android 15; PJD110 Build/AP3A.240617.008)" -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
                 unzip ota.zip
                 
             - name: Download payload dumper

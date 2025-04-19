@@ -31,7 +31,7 @@ jobs:
                 
             - name: Download payload dumper
               run: |
-                pip install git+https://github.com/5ec1cff/payload-dumper
+                pip install git+https://github.com/snowwolf725/payload-dumper
             
             - name: Extracting OTA
               run: |

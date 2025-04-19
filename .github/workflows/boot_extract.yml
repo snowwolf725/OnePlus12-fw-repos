@@ -31,7 +31,7 @@ jobs:
                 
             - name: Download payload dumper
               run: |
-                pip install cgi
+                pip install legacy-cgi
                 pip install git+https://github.com/snowwolf725/payload-dumper
             
             - name: Extracting OTA

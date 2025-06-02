@@ -41,11 +41,12 @@ jobs:
             
             - name: Extracting OTA
               run: |
-                payload_dumper --partitions boot,init_boot,recovery payload.bin
+                payload_dumper --partitions boot,init_boot,recovery,dtbo payload.bin
                 mv output/*.img .
                 zip boot.zip boot.img
                 zip init_boot.zip init_boot.img
                 zip recovery.zip recovery.img
+                zip dtbo.zip dtbo.img
                                             
             - name: Creating release
               run: |
@@ -54,4 +55,4 @@ jobs:
                 TAG_NAME=$(grep "product_name=" META-INF/com/android/metadata | cut -d = -f 2)
                 REL_NAME=$(grep "version_name=" META-INF/com/android/metadata | sed 's/^[^=]*=//')
                 if [ $TAG_NAME == 'CPH2581' ]; then REL_NAME="$REL_NAME$GLO";elif [ $TAG_NAME == "CPH2581EEA" ]; then REL_NAME="$REL_NAME$EU";fi
-                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 
+                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip dtbo.zip

@@ -15,9 +15,10 @@ https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2573_14
 
   
 ## CPH2581 (OxygenOS 14) EU
+https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2581_14+GLO
 
 ## CPH2581 (OxygenOS 14) GLO
-
+https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2581_14+GLO
 
 ## CPH2583 (OxygenOS 14) NA
 https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2583_14
@@ -31,11 +32,11 @@ https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=PJD110_15
 https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2573_15
 
 ## CPH2581 EU
-
+https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2581_15+EU
 
   
 ## CPH2581 GLO
-
+https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2581_15+GLO
   
 ## CPH2583 NA
 https://github.com/snowwolf725/OnePlus12-fw-repos/releases?q=CPH2583_15

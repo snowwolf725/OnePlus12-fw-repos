@@ -42,9 +42,12 @@ jobs:
                 zip init_boot.zip init_boot.img
                 zip recovery.zip recovery.img
                 zip dtbo.zip dtbo.img
+                zip system_dlkm.zip system_dlkm.img
                 zip vbmeta.zip vbmeta.img
                 zip vbmeta_system.zip vbmeta_system.img
                 zip vbmeta_vendor.zip vbmeta_vendor.img
+                zip vendor_boot.zip vendor_boot.img
+                zip vendor_dlkm.zip vendor_dlkm.img
                                             
             - name: Setting up Release name
               run: |  

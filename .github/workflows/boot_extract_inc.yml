@@ -45,6 +45,13 @@ jobs:
                 unzip boot.zip
                 unzip init_boot.zip
                 unzip recovery.zip
+                unzip dtbo.zip
+                unzip system_dlkm.zip
+                unzip vbmeta.zip
+                unzip vbmeta_system.zip
+                unzip vbmeta_vendor.zip
+                unzip vendor_boot.zip
+                unzip vendor_dlkm.zip
                 mkdir base
                 mkdir new
                 mv *.img base
@@ -61,14 +68,21 @@ jobs:
               run: |
                  ls
                  unzip ota.zip
-                 android_prebuilts_extract-tools/linux-x86/bin/ota_extractor -input_dir base -output_dir new -partitions boot,init_boot,recovery -payload payload.bin
+                 android_prebuilts_extract-tools/linux-x86/bin/ota_extractor -input_dir base -output_dir new -partitions boot,init_boot,recovery,dtbo,system_dlkm,vbmeta,vbmeta_system,vbmeta_vendor,vendor_boot,vendor_dlkm -payload payload.bin
                  mv new/*.img .
                  zip boot.zip boot.img
                  zip init_boot.zip init_boot.img
                  zip recovery.zip recovery.img
+                 zip dtbo.zip dtbo.img
+                 zip system_dlkm.zip system_dlkm.img
+                 zip vbmeta.zip vbmeta.img
+                 zip vbmeta_system.zip vbmeta_system.img
+                 zip vbmeta_vendor.zip vbmeta_vendor.img
+                 zip vendor_boot.zip vendor_boot.img
+                 zip vendor_dlkm.zip vendor_dlkm.img
                                                              
             - name: Creating release
               run: |
                 TAG_NAME=$(grep "product_name=" META-INF/com/android/metadata | cut -d = -f 2)
                 REL_NAME=$(grep "version_name=" META-INF/com/android/metadata | sed 's/^[^=]*=//')
-                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip 
+                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip dtbo.zip system_dlkm.zip vbmeta.zip vbmeta_system.zip vbmeta_vendor.zip vendor_boot.zip vendor_dlkm.zip

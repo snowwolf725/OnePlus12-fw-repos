@@ -61,4 +61,4 @@ jobs:
                 TAG_NAME=$(grep "product_name=" metadata | cut -d = -f 2)
                 REL_NAME=$(grep "version_name=" metadata | sed 's/^[^=]*=//')
                 if [ $TAG_NAME == 'CPH2581' ]; then REL_NAME="$REL_NAME$GLO";elif [ $TAG_NAME == "CPH2581EEA" ]; then REL_NAME="$REL_NAME$EU";fi
-                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip dtbo.zip vbmeta.zip vbmeta_system.zip vbmeta_vendor.zip 
+                gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip dtbo.zip system_dlkm.zip vbmeta.zip vbmeta_system.zip vbmeta_vendor.zip vendor_boot.zip vendor_dlkm.zip

@@ -52,7 +52,7 @@ jobs:
             - name: Setting up Release name
               run: |  
                  pip install unzip-http
-                 unzip_http ${{ github.event.inputs.fileurl }} META-INF/com/android/metadata
+                 unzip_http "${{ github.event.inputs.fileurl }}" META-INF/com/android/metadata
                  
             - name: Creating release
               run: |

@@ -62,7 +62,7 @@ jobs:
 
             - name: Download  Incremental OTA
               run: |
-                wget -q --user-agent="User-Agent: Dalvik/2.1.0 (Linux; U; Android 15; PJD110 Build/AP3A.240617.008)" --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
+                wget -q --user-agent="User-Agent: Dalvik/2.1.0 (Linux; U; Android 15; PJD110 Build/AP3A.240617.008)" -O ota.zip "${{ github.event.inputs.fileurl }}"
                                          
             - name: Extracting OTA
               run: |
@@ -83,6 +83,9 @@ jobs:
                                                              
             - name: Creating release
               run: |
+                EU="(EU)"
+                GLO="(GLO)"
                 TAG_NAME=$(grep "product_name=" META-INF/com/android/metadata | cut -d = -f 2)
                 REL_NAME=$(grep "version_name=" META-INF/com/android/metadata | sed 's/^[^=]*=//')
+                if [ $TAG_NAME == 'CPH2581' ]; then REL_NAME="$REL_NAME$GLO";elif [ $TAG_NAME == "CPH2581EEA" ]; then REL_NAME="$REL_NAME$EU";fi
                 gh release create $REL_NAME --title $(echo $REL_NAME) --notes "" boot.zip init_boot.zip recovery.zip dtbo.zip system_dlkm.zip vbmeta.zip vbmeta_system.zip vbmeta_vendor.zip vendor_boot.zip vendor_dlkm.zip

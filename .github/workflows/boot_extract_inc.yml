@@ -62,7 +62,7 @@ jobs:
 
             - name: Download  Incremental OTA
               run: |
-                wget -q --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
+                wget -q --user-agent="User-Agent: Dalvik/2.1.0 (Linux; U; Android 15; PJD110 Build/AP3A.240617.008)" --show-progress -O ota.zip "${{ github.event.inputs.fileurl }}"
                                          
             - name: Extracting OTA
               run: |
